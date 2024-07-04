@@ -115,7 +115,7 @@ python manage.py migrate
 ```
 
 ## Step 5: Set Up GraphQL Schema
-Create a new file called `schema.py` in the `core` project and set up the GraphQL schema.
+Create a combined GraphQL `schema.py` in the `core` project and set up the GraphQL schemas for the `books` and `quiz` apps:
 ```python
 # schema.py (core project)
 
@@ -172,4 +172,19 @@ class Query(graphene.ObjectType):
         return Answer.objects.all()
 
 schema = graphene.Schema(query=Query)
+```
+
+## Step 6: Set Up URLs
+Set up URLs to link the combined schema:
+```python
+from django.contrib import admin
+from django.urls import path, include
+from graphene_django.views import GraphQLView
+from .schema import schema
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    # path("", include("books.urls")),
+    path("graphql/", GraphQLView.as_view(graphiql=True, schema=schema)),
+]
 ```
