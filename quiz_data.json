@@ -1,0 +1,12 @@
+[
+    {"model": "quiz.category", "pk": 1, "fields": {"name": "Science"}},
+    {"model": "quiz.category", "pk": 2, "fields": {"name": "History"}},
+    {"model": "quiz.quizzes", "pk": 1, "fields": {"title": "General Science", "category": 1, "date_created": "2024-07-04T00:00:00Z"}},
+    {"model": "quiz.quizzes", "pk": 2, "fields": {"title": "World History", "category": 2, "date_created": "2024-07-04T00:00:00Z"}},
+    {"model": "quiz.questions", "pk": 1, "fields": {"quiz": 1, "type": 0, "title": "What is the chemical symbol for water?", "difficulty": 0, "date_created": "2024-07-04T00:00:00Z", "is_active": true}},
+    {"model": "quiz.questions", "pk": 2, "fields": {"quiz": 2, "type": 0, "title": "Who was the first President of the United States?", "difficulty": 1, "date_created": "2024-07-04T00:00:00Z", "is_active": true}},
+    {"model": "quiz.answer", "pk": 1, "fields": {"question": 1, "answer_text": "H2O", "is_right": true}},
+    {"model": "quiz.answer", "pk": 2, "fields": {"question": 1, "answer_text": "O2", "is_right": false}},
+    {"model": "quiz.answer", "pk": 3, "fields": {"question": 2, "answer_text": "George Washington", "is_right": true}},
+    {"model": "quiz.answer", "pk": 4, "fields": {"question": 2, "answer_text": "Thomas Jefferson", "is_right": false}}
+]
