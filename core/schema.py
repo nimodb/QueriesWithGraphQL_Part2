@@ -27,10 +27,8 @@ class QuestionsType(DjangoObjectType):
         model = Questions
         fields = (
             "id",
-            "quiz",
-            "type",
             "title",
-            "difficulty",
+            "quiz",
             "date_created",
             "is_active",
         )

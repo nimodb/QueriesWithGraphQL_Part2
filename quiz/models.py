@@ -34,7 +34,7 @@ class Questions(models.Model):
     quiz = models.ForeignKey(
         Quizzes, related_name="questions", on_delete=models.CASCADE
     )
-    type = models.CharField(max_length=100, default=0, choices=TYPE)
+    technique = models.CharField(max_length=100, default=0, choices=TYPE)
     title = models.CharField(max_length=255)
     difficulty = models.CharField(max_length=100, default=0, choices=DIFFICULTY_LEVELS)
     date_created = models.DateTimeField(auto_now_add=True)

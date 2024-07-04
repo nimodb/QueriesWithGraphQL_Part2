@@ -36,7 +36,7 @@ python manage.py startapp quiz
 
 ## Step 4: Set Up Models and Database
 Set up models for the `quiz` app:
-```bash
+```python
 # models.py (quiz app)
 
 from django.db import models
@@ -75,7 +75,7 @@ class Questions(models.Model):
     quiz = models.ForeignKey(
         Quizzes, related_name="questions", on_delete=models.CASCADE
     )
-    type = models.CharField(max_length=100, default=0, choices=TYPE)
+    technique = models.CharField(max_length=100, default=0, choices=TYPE)
     title = models.CharField(max_length=255)
     difficulty = models.CharField(max_length=100, default=0, choices=DIFFICULTY_LEVELS)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -142,7 +142,7 @@ class QuizzesType(DjangoObjectType):
 class QuestionsType(DjangoObjectType):
     class Meta:
         model = Questions
-        fields = ("id", "quiz", "type", "title", "difficulty", "date_created", "is_active")
+        fields = ("id", "quiz", "technique ", "title", "difficulty", "date_created", "is_active")
 
 class AnswerType(DjangoObjectType):
     class Meta:
@@ -211,4 +211,80 @@ Create a JSON file with sample quiz data and load it into the database.
 Load the data into the database.
 ```bash
 python manage.py loaddata quiz_data.json
+```
+
+## Step 8: Test GraphQL Endpoint
+Run the Django server and test the combined GraphQL endpoint:
+```bash
+python manage.py runserver
+```
+Navigate to `http://localhost:8000/graphql` and run the following queries:
+
+**Query for all books**
+
+```graphql
+{
+    allBooks {
+        id
+        title
+        author
+    }
+}
+```
+
+**Query for all categories**
+
+```graphql
+{
+    allCategories {
+        id
+        name
+    }
+}
+```
+
+**Query for all quizzes**
+
+```graphql
+{
+    allQuizzes {
+        id
+        title
+        category {
+            name
+        }
+        dateCreated
+    }
+}
+```
+
+**Query for all questions**
+
+```graphql
+{
+    allQuestions {
+        id
+        quiz {
+            title
+        }
+        title
+        dateCreated
+        isActive
+    }
+}
+```
+
+**Query for all answers**
+
+```graphql
+{
+    allAnswers {
+        id
+        question {
+            title
+        }
+        answerText
+        isRight
+    }
+}
 ```
